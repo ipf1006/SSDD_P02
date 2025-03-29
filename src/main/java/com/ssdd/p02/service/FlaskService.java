@@ -1,9 +1,14 @@
 package com.ssdd.p02.service;
 
+import com.ssdd.p02.model.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Service // De este modo Spring la gestiona como un bean
 public class FlaskService {
@@ -32,6 +37,18 @@ public class FlaskService {
             return restTemplate.getForObject(url, String.class);
         } catch (RestClientException e) {
             return errorContext + ": " + e.getMessage();
+        }
+    }
+
+    // Método que invoca al microservicio Flask y transforma el JSON recibido en una lista de objetos Usuario
+    public List<Usuario> getUsuarios() {
+        try {
+            String url = flaskUrl + "/api/usuarios";
+            Usuario[] usuarios = restTemplate.getForObject(url, Usuario[].class);
+            return Arrays.asList(usuarios); // Convertimos el array de usuarios en una lista Java
+        } catch (RestClientException e) {
+            System.err.println("Error al obtener usuarios: " + e.getMessage());
+            return Collections.emptyList(); // Devolvemos una lista vacía para que la aplicación no falle
         }
     }
 }
