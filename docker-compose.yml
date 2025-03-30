@@ -1,0 +1,35 @@
+services:
+
+  mysql:
+    image: mysql:8.0 # Imagen oficial de MySQL 8
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: ssdd_p02_bd
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql # Asocia volumen para persistencia de datos (los datos persisten aunque se borre el contenedor)
+
+  ssdd_p02_api:
+    image: ipf1006/api:latest
+    container_name: ssdd_p02_api
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+
+  ssdd_p02:
+    build: ./
+    container_name: ssdd_p02
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - ssdd_p02_api
+
+volumes:
+  mysql_data: # Volumen nombrado para almacenar datos de MySQL
