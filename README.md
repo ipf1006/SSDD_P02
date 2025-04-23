@@ -10,6 +10,7 @@ Se ha integrado tanto una **API externa** como una **API propia** desarrollada e
 - **Java 17**
 - **Spring Boot 3.4.4**
 - **Spring Data JPA + Hibernate**
+- **Spring Security**
 - **Thymeleaf**
 - **Docker & Docker Compose**
 - **MySQL 8**
