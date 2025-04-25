@@ -14,9 +14,9 @@ public class DataGenerator {
     public CommandLineRunner cargarUsuariosIniciales(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             if (usuarioRepository.count() == 0) {
-                usuarioRepository.save(new Usuario("Ignacio", "ipf1006@alu.ubu.es", passwordEncoder.encode("admin123"), "ROLE_ADMIN"));
-                usuarioRepository.save(new Usuario("Alumno2", "alumno2@alu.ubu.es", passwordEncoder.encode("user123"), "ROLE_USER"));
-                usuarioRepository.save(new Usuario("Alumno3", "alumno3@alu.ubu.es", passwordEncoder.encode("user123"), "ROLE_USER"));
+                usuarioRepository.save(new Usuario("Ignacio", "ipf1006@alu.ubu.es", passwordEncoder.encode("admin123"), "ADMIN"));
+                usuarioRepository.save(new Usuario("Alumno2", "alumno2@alu.ubu.es", passwordEncoder.encode("user123"), "USER"));
+                usuarioRepository.save(new Usuario("Alumno3", "alumno3@alu.ubu.es", passwordEncoder.encode("user123"), "USER"));
                 System.out.println("Usuarios insertados correctamente.");
             } else {
                 System.out.println("Los usuarios ya existen.");

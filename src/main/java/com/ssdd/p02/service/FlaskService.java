@@ -28,7 +28,7 @@ public class FlaskService {
      * @param endpoint Ruta relativa
      * @return Respuesta de Flask o mensaje de error procesado
      */
-    private String getResponse(String endpoint) {
+    public String getResponse(String endpoint) {
         try {
             String url = flaskUrl + endpoint;
             return restTemplate.getForObject(url, String.class);
@@ -78,6 +78,7 @@ public class FlaskService {
     public String apiExternaRecursoExistente() {
         return getResponse("/api/externa/recurso-existente");
     }
+
     // API EXTERNA - Método para simular error de "Recurso inexistente"
     public String apiExternaRecursoInexistente() {
         return getResponse("/api/externa/recurso-inexistente");
@@ -86,6 +87,22 @@ public class FlaskService {
     // API EXTERNA - Método para simular error de "Solicitud errónea"
     public String apiExternaSolicitudErronea() {
         return getResponse("/api/externa/solicitud-erronea");
+    }
+
+
+    // API EXTERNA - Método para leer un archivo correcto
+    public String apiExternaArchivoExistente() {
+        return "/api/externa/archivo/correcto";
+    }
+
+    // API EXTERNA - Método para intentar leer un archivo que no existe
+    public String apiExternaArchivoInexistente() {
+        return getResponse("/api/externa/archivo/inexistente");
+    }
+
+    // API EXTERNA - Método para intentar leer un archivo mal formateado
+    public String apiExternaArchivoRestringido() {
+        return "/api/externa/archivo/restringido";
     }
 
     // Centralización del manejo de errores
@@ -101,6 +118,8 @@ public class FlaskService {
             errorMessage = "No se pudo realizar la acción, ya existe un registro con estos datos.";
         } else if (e.getMessage().contains("400") || e.getMessage().contains("Bad Request")) {
             errorMessage = "La solicitud no se puede procesar porque algunos de los campos requeridos están vacíos";
+        } else if (e.getMessage().contains("500")){
+            errorMessage = "ERROR 500 - Ha ocurrido un error inesperado.";
         }
         return errorMessage;
     }

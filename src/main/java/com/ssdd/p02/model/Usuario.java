@@ -21,17 +21,17 @@ public class Usuario {
     private String password;
 
     @NotBlank(message = "Debe asignarse un rol")
-    private String role;
+    private String rol;
 
     // Constructores
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email, String password, String role) {
+    public Usuario(String nombre, String email, String password, String rol) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
-        this.role = role;
+        this.rol = rol;
     }
 
     // Getters y setters
@@ -63,11 +63,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public String getRol() {
+        return rol;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

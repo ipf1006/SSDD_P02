@@ -31,10 +31,11 @@ public class AppUserDetailsService implements UserDetailsService {
                 () -> new UsernameNotFoundException("Usuario no encontrado: " + username)
         );
 
-        // Construimos el UserDetails que Spring Security necesita
+        // UserDetails que Spring Security necesita
         return User.builder()
                 .username(usuario.getEmail())
                 .password(usuario.getPassword()) // Hash guardado en BD
+                .roles(usuario.getRol())
                 .build();
     }
 }

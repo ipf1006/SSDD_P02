@@ -48,7 +48,7 @@
         <div sec:authorize="isAuthenticated()">
             <form method="post" th:action="@{/logout}">
                 <button class="btn btn-outline-danger" type="submit">
-                    Cerrar sesión (<span th:text="${#authentication.name}">usuario@correo</span>)
+                    Cerrar sesión (<span th:text="${#authentication.name}">usuario@alu.ubu.es</span>)
                 </button>
             </form>
         </div>

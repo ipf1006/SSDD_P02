@@ -24,6 +24,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Permitimos todos a página de inicio, login y recursos estáticos
                         .requestMatchers("/", "/login", "/css/**", "/js/**").permitAll()
+                        // Restringir esta ruta solo a usuarios con rol ADMIN
+                        .requestMatchers("/api/externa/archivo/restringido").hasRole("ADMIN")
                         // El resto requiere autenticación
                         .anyRequest().authenticated()
                 )
@@ -38,6 +40,9 @@ public class SecurityConfig {
                         .logoutUrl("/logout")              // URL para hacer logout
                         .logoutSuccessUrl("/login?logout") // Redirigir tras logout
                         .permitAll()
+                )
+                .exceptionHandling(e -> e
+                        .accessDeniedPage("/acceso-denegado")
                 )
         ;
         return http.build();
