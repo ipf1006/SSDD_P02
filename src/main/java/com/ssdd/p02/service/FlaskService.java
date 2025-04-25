@@ -89,18 +89,17 @@ public class FlaskService {
         return getResponse("/api/externa/solicitud-erronea");
     }
 
-
-    // API EXTERNA - Método para leer un archivo correcto
+    // API PROPIA - Método para leer un archivo correcto
     public String apiExternaArchivoExistente() {
         return "/api/externa/archivo/correcto";
     }
 
-    // API EXTERNA - Método para intentar leer un archivo que no existe
+    // API PROPIA - Método para intentar leer un archivo que no existe
     public String apiExternaArchivoInexistente() {
         return getResponse("/api/externa/archivo/inexistente");
     }
 
-    // API EXTERNA - Método para intentar leer un archivo mal formateado
+    // API PROPIA - Método para intentar leer un archivo con acceso restringido
     public String apiExternaArchivoRestringido() {
         return "/api/externa/archivo/restringido";
     }
